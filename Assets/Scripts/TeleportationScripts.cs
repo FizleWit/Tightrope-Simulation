@@ -5,10 +5,11 @@ using UnityEngine;
 public class TeleportationScripts : MonoBehaviour
 {
     [SerializeField] GameObject HomeBaseTeleportation;
-    [SerializeField] GameObject player;
-    [SerializeField] Camera   playerHead;
+    
 
     Vector3 HomeBaseLocation;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,19 +19,21 @@ public class TeleportationScripts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        Vector3 playerLocation = gameObject.transform.position;
         //if Y is below a certain limit( 10 )wait 5-10 seconds and teleport to home base
-        if(Input.GetAxis("Horizontal") <= 10f)
+        if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            gameObject.transform.position = HomeBaseLocation;
+            TeleportPlayer(HomeBaseLocation);
         }
         //if y is above a certain limit (26) and z is above a certain limit (29)= made it to other side trigger something
-        if(Input.GetAxis("Horizontal") > 26f  )
-            {
-                if(Input.GetAxis("Horizontal") > 29f)
-                    {
-            gameObject.transform.position = HomeBaseLocation; 
-            //display you win
-                    }
-            }
+
+    }
+
+    void TeleportPlayer(Vector3 tpLocation)
+    {
+        gameObject.transform.position = tpLocation;
+        Debug.Log(tpLocation + " Teleport reached");
     }
 }
